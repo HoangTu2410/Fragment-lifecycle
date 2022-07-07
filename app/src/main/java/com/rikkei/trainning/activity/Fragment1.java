@@ -25,6 +25,9 @@ public class Fragment1 extends Fragment {
         Log.d(fragment_name,"Start onCreate "+fragment_name);
         mediaPlayer = MediaPlayer.create(getContext(),R.raw.music1);
         mediaPlayer.start();
+        if(savedInstanceState!=null){
+            mediaPlayer.seekTo(savedInstanceState.getInt("position",0));
+        }
     }
 
     @Nullable
@@ -38,7 +41,7 @@ public class Fragment1 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(fragment_name,"Start onViewCreated "+fragment_name);
-        btnStartFragment2 = view.findViewById(R.id.btnFragment2);
+        btnStartFragment2 = view.findViewById(R.id.btnStartFragment2);
         btnStartFragment2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +81,12 @@ public class Fragment1 extends Fragment {
         super.onStop();
         Log.d(fragment_name,"Start onStop "+fragment_name);
         mediaPlayer.pause();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("position", mediaPlayer.getCurrentPosition());
     }
 
     @Override
