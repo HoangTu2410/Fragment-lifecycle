@@ -12,10 +12,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if(savedInstanceState==null){
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.frame,new Fragment1(),"fragment1");
+            transaction.replace(R.id.frame,new Fragment1(),"fragment1");
+            transaction.addToBackStack("fragment1");
             transaction.commit();
         }
     }

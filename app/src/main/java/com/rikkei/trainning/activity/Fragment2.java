@@ -24,7 +24,6 @@ public class Fragment2 extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(fragment_name,"Start onCreate "+fragment_name);
         mediaPlayer = MediaPlayer.create(getContext(),R.raw.music2);
-        mediaPlayer.start();
         if(savedInstanceState!=null){
             mediaPlayer.seekTo(savedInstanceState.getInt("position",0));
         }
@@ -55,6 +54,9 @@ public class Fragment2 extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d(fragment_name,"Start onStart "+fragment_name);
+        if(!mediaPlayer.isPlaying()){
+            mediaPlayer.start();
+        }
     }
 
     @Override

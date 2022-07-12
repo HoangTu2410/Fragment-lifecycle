@@ -24,7 +24,6 @@ public class Fragment1 extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(fragment_name,"Start onCreate "+fragment_name);
         mediaPlayer = MediaPlayer.create(getContext(),R.raw.music1);
-        mediaPlayer.start();
         if(savedInstanceState!=null){
             mediaPlayer.seekTo(savedInstanceState.getInt("position",0));
         }
@@ -47,8 +46,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View view) {
                 FragmentManager manager = getParentFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.remove(manager.findFragmentByTag("fragment1"));
-                transaction.add(R.id.frame,new Fragment2(),"fragment2");
+                transaction.replace(R.id.frame,new Fragment2(),"fragment2");
                 transaction.addToBackStack("fragment2");
                 transaction.commit();
             }
